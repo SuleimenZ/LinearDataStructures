@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -95,6 +96,93 @@ namespace LinearDataStructures
                 Node = Node.Next;
             }
             Console.WriteLine();
+        }
+
+        //Adds a value after another value, if it is exists
+        public void AddAfter(int data, int pointer)
+        {
+            var Node = new LinkedListNode(First.Data, First.Next);
+            var NewNode = new LinkedListNode(data, null);
+            for (int i = 1; i <= Count; i++)
+            {
+                if (Node.Data == pointer)
+                {
+                    NewNode.Next = Node.Next;
+                    Node.Next = NewNode;
+                    Count++;
+                    return;
+                }
+                Node = Node.Next;
+            }
+        }
+
+        //Checks if value exists in the list
+        public bool Exists(int data)
+        {
+            var Node = new LinkedListNode(First.Data, First.Next);
+            for (int i = 1; i <= Count; i++)
+            {
+                if (data == Node.Data)
+                {
+                    return true;
+                }
+                Node = Node.Next;
+            }
+            return false;
+        }
+
+        //Displays highest
+        public void ShowHighest()
+        {
+            if (Count == 0)
+            {
+                Console.WriteLine("List is empty");
+            }
+
+            if (Count == 1)
+            {
+                Console.WriteLine(First.Data);
+            }
+
+            var Node = new LinkedListNode(First.Data, First.Next);
+            int highest = int.MinValue;
+
+            for (int i = 1; i <= Count; i++)
+            {
+                if (highest < Node.Data)
+                {
+                    highest = Node.Data;
+                }
+                Node = Node.Next;
+            }
+            Console.WriteLine(highest);
+        }
+
+        //Displays lowest
+        public void ShowLowest()
+        {
+            if (Count == 0)
+            {
+                Console.WriteLine("List is empty");
+            }
+
+            if (Count == 1)
+            {
+                Console.WriteLine(First.Data);
+            }
+
+            var Node = new LinkedListNode(First.Data, First.Next);
+            int lowest = int.MaxValue;
+
+            for (int i = 1; i <= Count; i++)
+            {
+                if (lowest < Node.Data)
+                {
+                    lowest = Node.Data;
+                }
+                Node = Node.Next;
+            }
+            Console.WriteLine(lowest);
         }
     }
 }
